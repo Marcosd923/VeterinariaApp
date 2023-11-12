@@ -1,6 +1,6 @@
 const Paciente = () => {
   return (
-    <div className="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
+    <div className="mx-5 my-5 bg-white shadow-md px-5 py-10 rounded-xl">
       <p className="font-bold mb-3 text-gray-700 uppercase">
         Nombre: {""}
         <span className="font-normal normal-case">Thor</span>
@@ -13,10 +13,7 @@ const Paciente = () => {
         Email: {""}
         <span className="font-normal normal-case">correo@correo.com</span>
       </p>
-      <p className="font-bold mb-3 text-gray-700 uppercase">
-        Fecha alta: {""}
-        <span className="font-normal normal-case">10 de Diciembre 2023</span>
-      </p>
+      <p className="font-bold mb-3 text-gray-700 uppercase">Fecha alta: {""}</p>
       <p className="font-bold mb-3 text-gray-700 uppercase">
         Síntomas: {""}
         <span className="font-normal normal-case">
