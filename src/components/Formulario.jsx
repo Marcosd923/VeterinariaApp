@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Formulario = ({ pacientes, setPacientes, paciente }) => {
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -45,11 +45,22 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       email,
       fecha,
       sintomas,
-      id: generarId(),
     };
 
-    //Tomar una copia de lo que hay en pacientes (spreed operation) y pasamos objeto pacientes, devuelve un arreglo nuevo que se asigna inmediatamente a setPacientes
-    setPacientes([...pacientes, objetoPaciente]);
+    if (paciente.id) {
+      //Editando el regristro
+      objetoPaciente.id = paciente.id;
+      const pacientesActualizados = pacientes.map((pacienteState) =>
+        pacienteState.id === paciente.id ? objetoPaciente : pacienteState
+      );
+      setPacientes(pacientesActualizados);
+      setPaciente({});
+    } else {
+      //Nuevo registro
+      objetoPaciente.id = generarId();
+      //Tomar una copia de lo que hay en pacientes (spread operation) y pasamos objeto pacientes, devuelve un arreglo nuevo que se asigna inmediatamente a setPacientes
+      setPacientes([...pacientes, objetoPaciente]);
+    }
 
     //Reiniciar el formulario despues de hacer submit
     setNombre("");
@@ -155,7 +166,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all rounded-md"
-          value="agregar paciente"
+          value={paciente.id ? "Actualizar paciente" : "Agregar paciente"}
         />
       </form>
     </div>
